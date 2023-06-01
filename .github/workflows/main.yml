@@ -1,1 +1,52 @@
+on:
+  push:
+    branches:
+      - 'setup-actions'
+    tags:
+      - 'v*'
 
+name: Build trinagle_check release
+
+jobs:
+  build:
+    permissions:
+      contents: 'write'
+    name: Build trinagle_check release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+
+      - name: PyInstaller-Linux
+        uses: JackMcKew/pyinstaller-action-linux@python3.10
+        with:
+          path: .
+
+      - name: Cp Linux Dist
+        run : cp -r dist/linux/triangle_check .
+
+      - name: Zip Linux Dist
+        run : zip -r triangle_check.zip triangle_check
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./triangle_check.zip
+          asset_name: triangle_check.zip
+          asset_content_type: application/gzip
