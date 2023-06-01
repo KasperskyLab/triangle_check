@@ -16,16 +16,27 @@ jobs:
         uses: actions/checkout@v2
 
 
-      - name: PyInstaller-Linux
+      - name: PyInstaller Linux
         uses: JackMcKew/pyinstaller-action-linux@python3.10
         with:
           path: .
 
+      - name: PyInstaller Windows
+        uses: JackMcKew/pyinstaller-action-windows@python3-10-pyinstaller-5-3
+        with:
+          path: .
+
       - name: Cp Linux Dist
-        run : cp -r dist/linux/triangle_check .
+        run : cp -r dist/linux/triangle_check triangle_check_linux
 
       - name: Zip Linux Dist
-        run : zip -r triangle_check.zip triangle_check
+        run : zip -r triangle_check_linux.zip triangle_check_linux
+
+      - name: Cp Win Dist
+        run : cp -r dist/windows/triangle_check_win triangle_check_win
+
+      - name: Zip Win Dist
+        run : zip -r triangle_check_win.zip triangle_check_win
 
       - name: Create Release
         id: create_release
@@ -38,13 +49,24 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset
-        id: upload-release-asset
+      - name: Upload Linux Release Asset
+        id: upload-linux-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./triangle_check.zip
-          asset_name: triangle_check.zip
+          asset_path: ./triangle_check_linux.zip
+          asset_name: triangle_check_linux.zip
+          asset_content_type: application/gzip
+
+     - name: Upload Win Release Asset
+        id: upload-win-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./triangle_check_win.zip
+          asset_name: triangle_check_win.zip
           asset_content_type: application/gzip
