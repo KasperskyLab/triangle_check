@@ -32,7 +32,7 @@ jobs:
         run : zip -r triangle_check_linux.zip triangle_check_linux
 
       - name: Cp Win Dist
-        run : cp -r dist/windows/triangle_check_win triangle_check_win
+        run : cp -r dist/windows/triangle_check triangle_check_win
 
       - name: Zip Win Dist
         run : zip -r triangle_check_win.zip triangle_check_win
