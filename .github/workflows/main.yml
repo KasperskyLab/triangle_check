@@ -4,7 +4,6 @@ on:
       - 'v*'
 
 name: Build trinagle_check release
-
 jobs:
   build:
     permissions:
@@ -60,7 +59,7 @@ jobs:
           asset_name: triangle_check_linux.zip
           asset_content_type: application/gzip
 
-     - name: Upload Win Release Asset
+      - name: Upload Win Release Asset
         id: upload-win-release-asset
         uses: actions/upload-release-asset@v1
         env:
