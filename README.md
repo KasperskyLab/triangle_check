@@ -2,7 +2,7 @@
 
 This script allows to scan iTunes backups for indicator of compromise by Operation Triangulation.
 
-For more information, please read [Securelist](https://securelist.ru/trng-2023/)
+For more information, please read [Securelist](https://securelist.com/trng-2023/)
 
 Contact: [triangulation@kaspersky.com](mailto:triangulation@kaspersky.com)
 
