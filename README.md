@@ -78,4 +78,4 @@ Example output:
 
 ## What's next?
 
-The research on the Operation Triangulation is ongoing. For more updates, please check [Securelist](https://securelist.ru/trng-2023/)
+The research on the Operation Triangulation is ongoing. For more updates, please check [Securelist](https://securelist.com/trng-2023/)
