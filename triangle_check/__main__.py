@@ -18,7 +18,7 @@ def main():
         print('Triangle Check: scan iTunes backups for traces of compromise by Operation Triangulation © 2023 AO Kaspersky Lab. All Rights Reserved.')
         print('\n  Contact: triangulation@kaspersky.com')
         print('  More info: https://securelist.ru/trng-2023/')
-        print('\nUsage: triangle_check.py /path/to/iTunes_backup [backup_password]')
+        print('\nUsage: python -m triangle_check /path/to/iTunes_backup [backup_password]')
         return
     if len(sys.argv) > 1:
         dir = sys.argv[1]
