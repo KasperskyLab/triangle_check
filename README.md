@@ -45,7 +45,7 @@ Usage: python -m triangle_check /path/to/iTunes_backup [backup_password]
 ### iTunes backup location
 
 Locate the backup directory created by iTunes. The exact location depends on the OS and is described [here](https://support.apple.com/en-us/HT204215).
-The directory you are looking for should contain may subdirectories, and should include 'Manifest.db', 'Manifest.plist'. The backup may be encrypted
+The directory you are looking for should contain many subdirectories, and should include 'Manifest.db', 'Manifest.plist'. The backup may be encrypted
 with a password, if set up in iTunes. That password is required to decrypt password-protected backups.
 
 ### Advanced: create backup with libimobiledevice
