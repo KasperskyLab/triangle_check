@@ -12,25 +12,34 @@ The script depends on: colorama (for pretty printing), pycryptodome
 
 ## Installation
 
+The triangle_check utility can be installed from [PyPI](https://pypi.org/project/triangle-check/) (recommended):
+
+```
+python -m pip install triangle_check
+```
+
 The script can be run as-is (the subdirectory *triangle_check* is required):
 
 ```
-python3 triangle_check.py 
+python -m pip install -r requirements.txt
+python triangle_check.py 
 ```
 
 It can also be built into a pip package:
 
 ```
-python3 -m build
-pip3 install dist/triangle_check-1.0-py3-none-any.whl
-
+git clone https://github.com/KasperskyLab/triangle_check
+cd triangle_check
+python -m build
+python -m pip install dist/triangle_check-1.0-py3-none-any.whl
 ```
 
+For Windows or Linux, alternatively use the [binary builds](https://github.com/KasperskyLab/triangle_check/releases) of the triangle_check utility.  
 
 ## Usage
 
 ```
-Usage: triangle_check.py /path/to/iTunes_backup [backup_password]
+Usage: python -m triangle_check /path/to/iTunes_backup [backup_password]
 ```
 
 ### iTunes backup location
