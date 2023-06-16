@@ -26,7 +26,11 @@ def main():
         password = sys.argv[2].encode('utf-8')
 
     checker = IOSBackupChecker()
-    results = checker.scan_dir(dir, password, ask_password)
+    try:
+        results = checker.scan_dir(dir, password, ask_password)
+    except RuntimeError as scan_fail:
+        print(scan_fail)
+        return
 
     if len(results) > 0:
         print(Fore.LIGHTRED_EX + '==== IDENTIFIED TRACES OF COMPROMISE (Operation Triangulation) ====' + Fore.RESET)
