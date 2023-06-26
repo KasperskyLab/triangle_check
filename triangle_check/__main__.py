@@ -5,6 +5,8 @@ import getpass
 from . import IOSBackupChecker
 from datetime import datetime
 from datetime import timezone
+from os.path import basename, dirname
+
 
 def ask_password():
     return getpass.getpass('The backup is encrypted, please enter the password:').encode('utf-8')
@@ -26,7 +28,24 @@ def main():
         password = sys.argv[2].encode('utf-8')
 
     checker = IOSBackupChecker()
-    results = checker.scan_dir(dir, password, ask_password)
+    try:
+        results = checker.scan_dir(dir, password, ask_password)
+    except RuntimeError as scan_fail:
+        print(Fore.LIGHTRED_EX + str(scan_fail) + Fore.RESET)
+        return
+    except FileNotFoundError as missing_file:
+        print(
+            Fore.LIGHTRED_EX
+            + "File "
+            + Fore.LIGHTBLUE_EX
+            + f"{basename(missing_file.filename)}"
+            + Fore.LIGHTRED_EX
+            + " not found at the location "
+            + Fore.LIGHTBLUE_EX
+            + f"{dirname(missing_file.filename)}"
+            + Fore.RESET
+        )
+        return
 
     if len(results) > 0:
         print(Fore.LIGHTRED_EX + '==== IDENTIFIED TRACES OF COMPROMISE (Operation Triangulation) ====' + Fore.RESET)
