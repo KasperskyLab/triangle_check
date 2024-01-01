@@ -39,7 +39,7 @@ For Windows or Linux, alternatively use the [binary builds](https://github.com/K
 ## Usage
 
 ```
-Usage: python -m triangle_check /path/to/iTunes_backup [backup_password]
+Usage: python -m triangle_check "/path/to/iTunes_backup" [backup_password]
 ```
 
 ### iTunes backup location
