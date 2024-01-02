@@ -213,12 +213,15 @@ class IOSBackupChecker:
 
         with open(path_osanalytics, 'rb') as f:
             osanalytics = plistlib.load(f)
-        baseline = osanalytics['netUsageBaseline']
-        for package in baseline:
-            if package in process_IOCs_exact:
-                self.append_detection(baseline[package][0].replace(tzinfo=timezone.utc).timestamp(), ('exact', 'NetUsage', package))
-            if (package in process_IOCs_implicit) or (package in process_IOCs_exact):
-                self.append_timeline(baseline[package][0].replace(tzinfo=timezone.utc).timestamp(), ('NetUsage', package))
+        try:
+            baseline = osanalytics['netUsageBaseline']
+            for package in baseline:
+                if package in process_IOCs_exact:
+                    self.append_detection(baseline[package][0].replace(tzinfo=timezone.utc).timestamp(), ('exact', 'NetUsage', package))
+                if (package in process_IOCs_implicit) or (package in process_IOCs_exact):
+                    self.append_timeline(baseline[package][0].replace(tzinfo=timezone.utc).timestamp(), ('NetUsage', package))
+        except KeyError as ke:
+            print('Warning: it appears that device analytics has been disabled, detection of some IOCs must be skipped.')
 
         datausage = sqlite3.connect(path_datausage)
         data_cur = datausage.cursor()
